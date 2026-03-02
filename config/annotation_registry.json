@@ -1,0 +1,8 @@
+{
+  "PublishApiEvent": "Marks controller types or methods so that API response events are published asynchronously after execution via PublishApiEventAspect (for analytics/logging).",
+  "Positive": "Marks an integration test method as a positive (happy-path) scenario; supports feature, testCase, expected, and failOnUnmatchedStub metadata.",
+  "Order": "Controls the execution order of integration test methods via value (int), first, or last flags.",
+  "Negative": "Marks an integration test method as a negative (error/unhappy) scenario; supports feature, testCase, expected, and failOnUnmatchedStub metadata.",
+  "Controller": "Marks a test class as representing a controller in integration tests; specifies controller name (value), description, and failOnUnmatchedStub.",
+  "BaseScenario": "Marks an integration test method as a base scenario with optional value(s), pathValues, and markAsDefault for test organization and reuse."
+}

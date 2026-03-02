@@ -244,8 +244,8 @@ H --> I
 
 ## Status
 
-Phase 1 – Code Intelligence Core  
-In progress
+Phase 1 – Code Intelligence Core
+Complete
 
 
 ---
@@ -282,22 +282,17 @@ The current phase supports:
 Create virtual environment:
 
 ```
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 ```
 
 Install required packages:
 
 ```
-pip install sentence-transformers
-pip install faiss-cpu
-pip install tree-sitter
-pip install rank-bm25
-pip install pydantic
-pip install numpy
+pip install -r requirements.txt
 ```
 
-You must also install tree-sitter-java grammar.
+This installs: `sentence-transformers`, `faiss-cpu`, `tree-sitter>=0.22`, `tree-sitter-java>=0.21`, `rank-bm25`, `pydantic>=2`, and `numpy`.
 
 
 ---
@@ -347,23 +342,28 @@ This improves embedding quality for custom annotations.
 
 ### 4. Run indexing
 
-Run:
+Index with the default query:
 
 ```
-python main.py /workspace/point-of-sale-backend-engine
+python3 main.py /workspace/point-of-sale-backend-engine
+```
+
+Or provide a custom query to run after indexing:
+
+```
+python3 main.py /workspace/point-of-sale-backend-engine "Find payment service methods"
 ```
 
 The system will:
 
-1. Detect repo name
-2. Detect branch name
-3. Parse Java files
-4. Extract classes and methods
-5. Build chunks
-6. Generate embeddings locally
-7. Save FAISS index
-8. Save metadata.json
-9. Build BM25 index
+1. Detect repo name and current git branch
+2. Parse all `.java` files (skips `target/`, `build/`, `out/`, `.git/`)
+3. Extract classes, methods, and annotations via AST
+4. Build class and method chunks
+5. Generate local embeddings (BAAI/bge-large-en-v1.5)
+6. Save FAISS index and `metadata.json` per repo/branch
+7. Build BM25 index in memory
+8. Run hybrid search and print top 5 results
 
 
 ---
@@ -402,12 +402,26 @@ Find Kafka listener handling order events
 Output example:
 
 ```
-File: OrderConsumer.java
-Class: OrderConsumer
-Method: handleOrderCreated
+Repo: point-of-sale-backend-engine  Branch: master
+Parsed files: 142
+Total chunks: 891
+Embedding shape: (891, 1024)
+Saved FAISS index to data/point-of-sale-backend-engine/master/faiss_index.bin
+Saved metadata to data/point-of-sale-backend-engine/master/metadata.json
 
-@KafkaListener(...)
-public void handleOrderCreated(...)
+Query: 'Find Kafka listener handling order events'
+
+Top 5 results:
+
+[1] score=0.8921
+  file:        /workspace/.../OrderConsumer.java
+  class:       OrderConsumer
+  method:      handleOrderCreated
+  annotations: KafkaListener, Transactional
+  type:        method
+
+[2] score=0.8104
+  ...
 ```
 
 
@@ -424,7 +438,7 @@ git checkout feature/improvement-add-on-beverage
 Run indexing again:
 
 ```
-python main.py /workspace/point-of-sale-backend-engine
+python3 main.py /workspace/point-of-sale-backend-engine
 ```
 
 New index will be stored in a different folder.
