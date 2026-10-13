@@ -1,0 +1,23 @@
+.github/workflows/notify-telegram.yml
+  fde9fcaa0de816b8 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "9a5add877e8e97fbf92fc86202664cea6c4cddb8",
+  "prompts": {
+    "fde9fcaa0de816b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32a2f1a8-2055-4da5-ad48-ff5d6bf58943",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Habridio Kurniawan Putra <habridio.putra@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
