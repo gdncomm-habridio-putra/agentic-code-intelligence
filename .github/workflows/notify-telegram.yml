@@ -1,0 +1,15 @@
+name: Notify Telegram on PR merged
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [feature/test-telegram-notif]
+
+jobs:
+  notify:
+    uses: gdncomm-habridio-putra/cecp-status-notifier-test/.github/workflows/notify-pr-merged.yml@main
+    with:
+      thread_id: ${{ vars.TELEGRAM_THREAD_ID }}
+    secrets:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
