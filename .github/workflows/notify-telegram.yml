@@ -2,7 +2,7 @@ name: Notify Telegram on PR merged
 
 on:
   pull_request:
-    types: [closed]
+    types: [opened, closed]
     branches: [feature/test-telegram-notif]
 
 jobs:
