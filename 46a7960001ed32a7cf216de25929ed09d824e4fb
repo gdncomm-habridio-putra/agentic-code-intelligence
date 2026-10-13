@@ -1,0 +1,23 @@
+docs/telegram-notif-test.md
+  fde9fcaa0de816b8 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "46a7960001ed32a7cf216de25929ed09d824e4fb",
+  "prompts": {
+    "fde9fcaa0de816b8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32a2f1a8-2055-4da5-ad48-ff5d6bf58943",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Habridio Kurniawan Putra <habridio.putra@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 0,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    }
+  }
+}
